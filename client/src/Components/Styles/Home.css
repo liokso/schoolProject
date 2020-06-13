@@ -1,0 +1,28 @@
+main{
+    background: white;
+    height: 100%;
+    align-content: center;
+}
+
+#content {
+    display: inline-block;
+    height: 52vh;
+    color: white;
+  }
+
+.content.wrap {
+    /* background: yellow; */
+    display: flex;
+    justify-content: center;
+    margin: 5vh;
+}
+
+#bottom {
+      justify-content: center;
+      display: flex;
+  }
+
+#bottom_content {
+    display: inline-block;
+	margin-top: 20vh;
+  }

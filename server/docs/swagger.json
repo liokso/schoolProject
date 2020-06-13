@@ -1,0 +1,489 @@
+{ "openapi":"3.0.0",
+    "info":{ 
+        "title":"Swagger Offences",
+        "description":"This API is used to guide the development of clint side",
+        "version":"1.0.0",
+        "contact":{"email":"test@fool.io"},
+        "license":{
+            "name":"Apache 2.0",
+            "url":"http://www.apache.org/licenses/LICENSE-2.0.html"
+        } 
+    },
+    "servers":[ 
+        {
+            "url": "http://localhost:8888"
+        }
+    ],
+    "basePath":"/v2",
+    "tags":[
+        {
+            "name":"Account",
+            "description": "About Login and Register"
+        },
+        {
+            "name": "Offences",
+            "description": "Get offences data"
+        },
+        {
+            "name": "Search",
+            "description": "search and filter function"
+        },
+        {
+            "name": "Filter Condition",
+            "description": "Get filter condition"
+        }
+    ],
+    "paths":{ 
+        "/users/login": {
+            "post":{
+                "tags":["Account"],
+                "summary": "Login into the system",
+                "description":"",
+                "consumes":["application/json"],
+                "produces":["application/json"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "example": {
+                                "email" : "111@111",
+                                "password": "12345678"
+                            }
+                        }
+                    }
+                },
+                "parameters":[
+                    {
+                    "name":"email",
+                    "in":"body",
+                    "description": "user email",
+                    "schema": {
+                        "type":"string",
+                        "example":"test@test"
+                    }
+                },
+                {
+                    "name":"password",
+                    "in":"body",
+                    "description": "user password",
+                    "schema": {
+                        "type":"password",
+                        "example":"12345678"
+                    }
+                }],
+                "responses":{
+                    "201":{
+                        "description":"successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                },
+                                "example": {
+                                    "message" : "successful",
+                                    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo1Nzg2LCJlbWFpbCI6ImRlbW8xMjM0QGdtYWlsLmNvbSJ9LCJpYXQiOjE1NTUzMjQ2MDIsImV4cCI6MTU1NTQxMTAwMn0.mo85iKuAQ_h8n8-6pkeNNs5CCnV0G8hScxhi_ml_Q6c"
+                                }
+                            }
+
+                        }
+                        
+                    },
+                    "401":{
+                           "description":"Invalid input"
+                        }
+                }
+            }            
+        },
+        "/users/register": {
+            "post":{
+                "tags":["Account"],
+                "summary": "Register a new account to the system",
+                "description":"",
+                "consumes":["application/json"],
+                "produces":["application/json"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "example": {
+                                "email" : "111@222",
+                                "password": "12345678"
+                            }
+                        }
+                    }
+                },
+                "parameters":[
+                    {
+                    "name":"email",
+                    "in":"body",
+                    "description": "user email",
+                    "schema": {
+                        "type":"string",
+                        "example":"gggg@gmail.com"
+                    }
+                },
+                {
+                    "name":"password",
+                    "in":"body",
+                    "description": "user password",
+                    "schema": {
+                        "type":"password",
+                        "example":"12312312"
+                    }
+                }],
+                "responses":{
+                    "201":{
+                        "description":"successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                },
+                                "example": {
+                                    "message" : "successful",
+                                    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo1Nzg2LCJlbWFpbCI6ImRlbW8xMjM0QGdtYWlsLmNvbSJ9LCJpYXQiOjE1NTUzMjQ2MDIsImV4cCI6MTU1NTQxMTAwMn0.mo85iKuAQ_h8n8-6pkeNNs5CCnV0G8hScxhi_ml_Q6c"
+                                }
+                            }
+
+                        }
+                        
+                    },
+                    "401":{
+                           "description":"Invalid input"
+                        }
+                }
+            }            
+        },
+        "/offences": {
+            "get" : {
+                "tags": ["Offences"],
+                "summary": "Get offences from server",
+                "description": "",
+                "consumes":["application/json"],
+                "produces":["application/json"],
+                "responses" : {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "error": "false",
+                                    "message": "succes",
+                                    "offences": "[\"Armed Robbery\", \"Arson\"]"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Fail",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "error": "true",
+                                    "message": "Server Error"                                   
+                                }
+                            }
+                        }
+                    }
+                }
+            }  
+        },
+        "/search": {
+            "get" : {
+                "tags": ["Search"],
+                "summary": "",
+                "description": "",
+                "consumes":["application/json"],
+                "produces":["application/json"],
+                "parameters":[
+                    {
+                    "name":"offence",
+                    "in":"query",
+                    "description": "offence name",
+                    "schema": {
+                        "type":"string",
+                        "example":"Arson"
+                    }
+                }],
+                "responses" : {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "error": "false",
+                                    "result": "[{LGA:Aurukun Shire Council,total:6,lat:-13.354875,lng:141.729058}, {LGA:Balonne Shire Council,total:18,lat:-28.464607,lng:148.189292}]"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "error": "true",
+                                    "message": "request offence parameters wrong"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "error": "true",
+                                    "message": "Authorization faile"
+                                }
+                            }
+                        }
+                    }
+                }
+            }            
+        },
+        "/advanceFilter": {
+            "get" : {
+                "tags": ["Search"],
+                "summary": "",
+                "description": "",
+                "consumes":["application/json"],
+                "produces":["application/json"],
+                "parameters":[
+                    {
+                        "name":"areas",
+                        "in":"query",
+                        "description": "area names",
+                        "schema": {
+                            "type":"string list",
+                            "example":"Aurukun Shire Council,Balonne Shire Council,Barcoo Shire Council"
+                        }
+                    },
+                    {
+                        "name":"offences",
+                        "in":"query",
+                        "description": "offence names",
+                        "schema": {
+                            "type":"string list",
+                            "example":"Arson, Armed Robbery"
+                        }
+                    },
+                    {
+                        "name":"genders",
+                        "in":"query",
+                        "description": "gender",
+                        "schema": {
+                            "type":"string",
+                            "example":"Female"
+                        }
+                    },
+                    {
+                        "name":"ages",
+                        "in":"query",
+                        "description": "age",
+                        "schema": {
+                            "type":"string",
+                            "example":"Adult"
+                        }
+                    },
+                    {
+                        "name":"years1",
+                        "in":"query",
+                        "description": "year number",
+                        "schema": {
+                            "type":"int",
+                            "example":"2001"
+                        }
+                    },
+                    {
+                        "name":"years2",
+                        "in":"query",
+                        "description": "year name",
+                        "schema": {
+                            "type":"int",
+                            "example":"2018"
+                        }
+                    }
+                ],
+                "responses" : {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "error": "true",
+                                    "message": "Bad request"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "error": "true",
+                                    "message": "Authorization faile"
+                                }
+                            }
+                        }
+                    }
+                }
+            }            
+        },
+        "/filter/areas": {
+            "get": {
+                "tags":["Filter Condition"],
+                "summary": "Get all areas from server",
+                "description": "Get all areas from server",
+                "consumes":["application/json"],
+                "produces":["application/json"],
+                "responses" : {
+                    "200": {
+                        "description":"Success",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "error": "false",
+                                    "result" : "[Council, Jackpot]"                                    
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description":"Fail",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "error": "true",
+                                    "message" : "Bad request"                                    
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/filter/genders": {
+            "get": {
+                "tags":["Filter Condition"],
+                "summary": "get all genders from server",
+                "description": "get all genders from server",
+                "consumes":["application/json"],
+                "produces":["application/json"],
+                "responses" : {
+                    "200": {
+                        "description":"Success",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "error": "false",
+                                    "result" : "[Female, Male]"                                    
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description":"Fail",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "error": "true",
+                                    "message" : "Bad request"                                    
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/filter/ages": {
+            "get": {
+                "tags":["Filter Condition"],
+                "summary": "get all ages from server",
+                "description": "get all ages from server",
+                "consumes":["application/json"],
+                "produces":["application/json"],
+                "responses" : {
+                    "200": {
+                        "description":"Success",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "error": "false",
+                                    "result" : "[Adult, Juvenile]"                                    
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description":"Fail",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "error": "true",
+                                    "message" : "Bad request"                                    
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/filter/years": {
+            "get": {
+                "tags":["Filter Condition"],
+                "summary": "get all years from server",
+                "description": "get all years from server",
+                "consumes":["application/json"],
+                "produces":["application/json"],
+                "responses" : {
+                    "200": {
+                        "description":"Success",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "error": "false",
+                                    "result" : "[2001, 2003]"                                    
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description":"Fail",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "error": "true",
+                                    "message" : "Bad request"                                    
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }        
+    }
+}
+                

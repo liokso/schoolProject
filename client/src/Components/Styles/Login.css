@@ -1,0 +1,15 @@
+#login_main {
+    display: flex;
+    justify-content: center;
+    margin: 10vh;
+}
+
+#basic-addon1 {
+    width: 100px;
+    display: inline;
+}
+
+.btn.register {
+    align-self: flex-end;
+    margin-left: 10px;
+}
